@@ -1,4 +1,6 @@
-# Class for player
+# frozen_string_literal: true
+
+# Class for player initializes with name and lives
 class Player
   attr_reader :name, :lives
 

@@ -3,7 +3,7 @@
 require_relative 'player'
 require_relative 'question'
 
-# Class for game
+# Class for game - handles logic for game interaction
 class Game
   attr_writer :input
 
@@ -38,7 +38,7 @@ class Game
 
   # Check if game is over
   def game_over
-    @player1.lives == 0 || @player2.lives ==0
+    @player1.lives.zero? || @player2.lives.zero?
   end
 
   # shows score during each turn
@@ -48,33 +48,17 @@ class Game
 
   # displays winner and score and displays game over messaging
   def display_winner
-    puts @player1.lives > @player2.lives ? "\n #{@player1.name} wins with a score of #{@player1.lives}/3" : "#{@player2.name} wins with a score of #{@player2.lives}/3"
+    winner_p1 = "\n#{@player1.name} wins with a score of #{@player1.lives}/3"
+    winner_p2 = "\n#{@player2.name} wins with a score of #{@player2.lives}/3"
+    puts @player1.lives > @player2.lives ? winner_p1 : winner_p2
     puts "\n ----- Game Over -----"
-    puts "Good bye!"
+    puts 'Good bye!'
   end
 
-  # Method to handle new turn, switch current player, loads new question 
+  # Method to handle new turn, switch current player, loads new question
   def new_turn
     puts "\n----- NEW TURN -----"
     @current_player = @current_player == @player1 ? @player2 : @player1
     @question = Question.new
   end
-
-  # game flow
-  def play
-    while game_over == false
-    display_question
-    take_input
-    display_validation(@input)
-    display_scores
-    if game_over 
-       display_winner
-    else
-       new_turn
-    end
-
-  end
-    
-  end
 end
-

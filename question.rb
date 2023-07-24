@@ -1,4 +1,6 @@
-# Class for question
+# frozen_string_literal: true
+
+# Class for question creates questions and validates answers
 class Question
   attr_reader :prompt
 
@@ -12,6 +14,8 @@ class Question
 
   # Method to validate answer
   def validate_answer(input)
+    puts "input = #{input}"
+    puts "answer = #{@answer}"
     input.to_i == @answer # converts to integer - edge case if answer is 0 not handled
   end
 end
